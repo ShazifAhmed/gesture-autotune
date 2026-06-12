@@ -112,8 +112,13 @@ output:
 
 ```bash
 gesture-autotune --list-devices
-# example: 3 = MacBook Air Microphone (in), 1 = AirPods Pro (out)
-gesture-autotune --key C --mode major --input-device 3 --output-device 1
+**Tip:** prefer device *names* over numbers. Indices reshuffle whenever a device
+connects (e.g. an iPhone Continuity Camera, AirPods, or a monitor), so a number
+that worked yesterday may point somewhere else today. Names are matched as a
+substring and stay stable:
+
+    gesture-autotune --key C --mode major \
+      --input-device "MacBook Air Microphone" --output-device "AirPods"
 ```
 
 These flags apply to that run only — they don't change any system setting.
@@ -129,6 +134,13 @@ You're on Python 3.13 (or newer). MediaPipe has no build for it yet. Install
 Python 3.12 (`brew install python@3.12`) and recreate the venv with
 `python3.12 -m venv .venv`. To just run the tests/offline demo without the live
 app, you can stay on 3.13 and `pip install numpy scipy pytest`.
+
+**`PortAudioError: Invalid number of channels [-9998]`.**
+The audio device index you passed points at a device that can't do the requested
+mono stream — almost always because the device list got renumbered when something
+connected (an iPhone Continuity Camera, a headset, an external display). Re-run
+`gesture-autotune --list-devices` to get current indices, or just use device
+*names* instead of numbers (see "Run it"), which don't shift.
 
 **`No module named 'gesture_autotune'` when running the app.**
 The package lives in `src/` and needs to be installed into the venv:
