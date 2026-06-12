@@ -1,0 +1,8 @@
+# Core DSP (required for the offline demo and the test suite)
+numpy>=1.23
+scipy>=1.9
+
+# Real-time app (webcam + live audio). Not needed to run the tests.
+sounddevice>=0.4.6
+opencv-python>=4.8
+mediapipe>=0.10
