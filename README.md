@@ -54,11 +54,12 @@ up). Closed fist → your natural voice; open hand → full robotic snap-to-scal
 
 ## Tests
 
-The DSP is pure NumPy and unit-tested without any audio hardware:
+Install the dev dependencies, then run the suite (pure NumPy, no audio hardware needed):
 
 ```
-$ pytest -q
-21 passed
+pip install -e ".[dev]"
+pytest -q
+#21 passed
 ```
 
 The tests confirm pitch detection recovers pure tones to <1%, the shifter scales
